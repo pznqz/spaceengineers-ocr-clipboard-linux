@@ -6,7 +6,7 @@ this is working for me with a very low rate of failure (once in a blue moon it m
 Long story short, 
 (ill explain everything i did to produce the traineddata later so if someone wants to reproduce and improve upon process)
 
-You need \n
+You need
 xdotool
 maim
 xclip
