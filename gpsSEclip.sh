@@ -41,7 +41,7 @@ GPSSE="GPS:"
 #  If your adaptive sharpen value gets high you may want to uncomment out the ffplay (from ffmpeg) line below and point it at an system
 #  sound to indicate that the script has ended
 # scale you can tweak up or down by 5-10 % to find what works best for you
-# You share your successful sweet spots and screen resolution to help others
+# You can share your successful sweet spots and screen resolution to help others
 
 # name
 maim -i $(xdotool getactivewindow) -g $gNAME $SCR_IMG.png
