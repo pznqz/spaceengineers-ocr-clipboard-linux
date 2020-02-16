@@ -11,7 +11,7 @@ xdotool
 maim
 xclip
 imagemagick
-and tesseract-ocr with i think english lang data installed
+and tesseract-ocr with i think english tessdata installed
 
 place SEfont.traineddata into /usr/share/tessdata/
 
