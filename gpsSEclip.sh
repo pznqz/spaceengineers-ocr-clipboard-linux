@@ -42,6 +42,7 @@ GPSSE="GPS:"
 #  sound to indicate that the script has ended
 # scale you can tweak up or down by 5-10 % to find what works best for you
 # You can share your successful sweet spots and screen resolution to help others
+# My screen is 1920x1200 and the SE window is 1920x1178 borderless
 
 # name
 maim -i $(xdotool getactivewindow) -g $gNAME $SCR_IMG.png
