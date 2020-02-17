@@ -36,30 +36,51 @@ GPSSE="GPS:"
 # modulate, normalize, channel RGB and negate are to change the image to black on white, this vastly improves the success rate
 # adaptive sharpen and scale and sitting a sweet spot thats netting me the best results
 # depending on your resolution/window size etc you may want to tweak these
+#
+# UPDATE: old adaptive sharpen setting was '-adaptive-sharpen 5%' and it was sitting between -normalize and -channel, but anywhere before
+#  scale should be fine.
+# i have removed adaptive sharpen when using the latest traineddata as it does more harm than good (atleast in my case). With the current 
+#  settings i havent seen any errors. Prior to that it would only fail to spot '.' and seeing as gps in the gps menu always have 2 digits 
+#  following '.', the script has been modified to check for '.' and insert it if its absent.
+#
 # i wouldn't move adaptive sharpen more than 1% at a time up or down, and the higher it goes the longer the process takes
-#  you can also move adaptive sharpen to after scale but this will also increase the tim the processing takes as the image is larger
+#  you can also move adaptive sharpen to after scale but this will also increase the time the processing takes as the image is larger
 #  If your adaptive sharpen value gets high you may want to uncomment out the ffplay (from ffmpeg) line below and point it at an system
 #  sound to indicate that the script has ended
 # scale you can tweak up or down by 5-10 % to find what works best for you
 # You can share your successful sweet spots and screen resolution to help others
-# My screen is 1920x1200 and the SE window is 1920x1178 borderless
+# My screen is 1920x1200 and the SE window is 1920x1178 borderless 
+# MY settings with the old traineddata were adaptive sharpen of 5% and scale of 150%
 
 # name
 maim -i $(xdotool getactivewindow) -g $gNAME $SCR_IMG.png
-mogrify -modulate 100,0 -normalize -adaptive-sharpen 5% -channel RGB -negate -scale 150% $SCR_IMG.png
+mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% $SCR_IMG.png
 GPSSE="${GPSSE}$(echo $(tesseract $SCR_IMG.png stdout -l SEfont -c tessedit_char_whitelist='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-#!,[]._ ?') |sed -e 's/[[:space:]]*$//' ):"
 # x
 maim -i $(xdotool getactivewindow) -g $gX ${SCR_IMG}x.png
-mogrify -modulate 100,0 -normalize -adaptive-sharpen 5% -channel RGB -negate -scale 150% ${SCR_IMG}x.png
+mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}x.png
 GPSSE="${GPSSE}$(echo $(tesseract ${SCR_IMG}x.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' '):"
+if [ "${GPSSE: -5:1}" != "." ]
+then
+    GPSSE="${GPSSE%????}.${GPSSE: -4}"
+fi
 # y
 maim -i $(xdotool getactivewindow) -g $gY ${SCR_IMG}y.png
-mogrify -modulate 100,0 -normalize -adaptive-sharpen 5% -channel RGB -negate -scale 150% ${SCR_IMG}y.png
+mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}y.png
 GPSSE="${GPSSE}$(echo $(tesseract ${SCR_IMG}y.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' '):"
+if [ "${GPSSE: -5:1}" != "." ]
+then
+    GPSSE="${GPSSE%????}.${GPSSE: -4}"
+fi
 # z
 maim -i $(xdotool getactivewindow) -g $gZ ${SCR_IMG}z.png
-mogrify -modulate 100,0 -normalize -adaptive-sharpen 5% -channel RGB -negate -scale 150% ${SCR_IMG}z.png
+mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}z.png
 GPSSE="${GPSSE}$(echo $(tesseract ${SCR_IMG}z.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' '):"
+if [ "${GPSSE: -5:1}" != "." ]
+then
+    GPSSE="${GPSSE%????}.${GPSSE: -4}"
+fi
+
 
 
 # throwing it at all selections to see if it would change the clipboard inside wine/SE
