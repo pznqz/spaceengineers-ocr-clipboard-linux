@@ -55,30 +55,30 @@ GPSSE="GPS:"
 # name
 maim -i $(xdotool getactivewindow) -g $gNAME $SCR_IMG.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% $SCR_IMG.png
-GPSSE="${GPSSE}$(echo $(tesseract $SCR_IMG.png stdout -l SEfont -c tessedit_char_whitelist='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-#!,[]._ ?') |sed -e 's/[[:space:]]*$//' ):"
+GPSSE+="$(echo $(tesseract $SCR_IMG.png stdout -l SEfont -c tessedit_char_whitelist='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-#!,[]._ ?') |sed -e 's/[[:space:]]*$//' ):"
 # x
 maim -i $(xdotool getactivewindow) -g $gX ${SCR_IMG}x.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}x.png
-GPSSE="${GPSSE}$(echo $(tesseract ${SCR_IMG}x.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' '):"
-if [ "${GPSSE: -5:1}" != "." ]
+GPSSE+="$(echo $(tesseract ${SCR_IMG}x.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' \f'):"
+if [ "${GPSSE: -4:1}" != "." ]
 then
-    GPSSE="${GPSSE%????}.${GPSSE: -4}"
+    GPSSE="${GPSSE%???}.${GPSSE: -3}"
 fi
 # y
 maim -i $(xdotool getactivewindow) -g $gY ${SCR_IMG}y.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}y.png
-GPSSE="${GPSSE}$(echo $(tesseract ${SCR_IMG}y.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' '):"
-if [ "${GPSSE: -5:1}" != "." ]
+GPSSE+="$(echo $(tesseract ${SCR_IMG}y.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' \f'):"
+if [ "${GPSSE: -4:1}" != "." ]
 then
-    GPSSE="${GPSSE%????}.${GPSSE: -4}"
+    GPSSE="${GPSSE%???}.${GPSSE: -3}"
 fi
 # z
 maim -i $(xdotool getactivewindow) -g $gZ ${SCR_IMG}z.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}z.png
-GPSSE="${GPSSE}$(echo $(tesseract ${SCR_IMG}z.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' '):"
-if [ "${GPSSE: -5:1}" != "." ]
+GPSSE+="$(echo $(tesseract ${SCR_IMG}z.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' \f'):"
+if [ "${GPSSE: -4:1}" != "." ]
 then
-    GPSSE="${GPSSE%????}.${GPSSE: -4}"
+    GPSSE="${GPSSE%???}.${GPSSE: -3}"
 fi
 
 
