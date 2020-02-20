@@ -3,7 +3,6 @@
 # you can easily use scrot and xsel instead of maim and xclip
 # This script is a derivative of one found here
 # https://askubuntu.com/questions/280475/how-can-instantaneously-extract-text-from-a-screen-area-using-ocr-tools
-# tried both xsel and xclip but neither could put the selection into wines clipboard
 
 
 # ######################################################### PLEASE READ
@@ -22,7 +21,7 @@ gZ="255x40+1423+853"
 # change to directory of your choice leaving tempClip or choosing a different name.
 # tempClip will be the file name of the images grabbed from the screen
 # view these images when fine tuning your geometry vars above
-SCR_IMG="/home/q_p/Projects/2020/SE/OCR/tempClip"
+SCR_IMG="/path/to/where/you/want/to/store/the/tempClip"
 
 #trap "rm $SCR_IMG*" EXIT
 # you could uncomment above but i'd leave it for the moment for debug purposes
@@ -52,12 +51,14 @@ GPSSE="GPS:"
 # My screen is 1920x1200 and the SE window is 1920x1178 borderless 
 # MY settings with the old traineddata were adaptive sharpen of 5% and scale of 150%
 
+ACTIVEWINVAR=$(xdotool getactivewindow)
+
 # name
-maim -i $(xdotool getactivewindow) -g $gNAME $SCR_IMG.png
+maim -i $ACTIVEWINVAR -g $gNAME $SCR_IMG.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% $SCR_IMG.png
 GPSSE+="$(echo $(tesseract $SCR_IMG.png stdout -l SEfont -c tessedit_char_whitelist='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-#!,[]._ ?') |sed -e 's/[[:space:]]*$//' ):"
 # x
-maim -i $(xdotool getactivewindow) -g $gX ${SCR_IMG}x.png
+maim -i $ACTIVEWINVAR -g $gX ${SCR_IMG}x.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}x.png
 GPSSE+="$(echo $(tesseract ${SCR_IMG}x.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' \f'):"
 if [ "${GPSSE: -4:1}" != "." ]
@@ -65,7 +66,7 @@ then
     GPSSE="${GPSSE%???}.${GPSSE: -3}"
 fi
 # y
-maim -i $(xdotool getactivewindow) -g $gY ${SCR_IMG}y.png
+maim -i $ACTIVEWINVAR -g $gY ${SCR_IMG}y.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}y.png
 GPSSE+="$(echo $(tesseract ${SCR_IMG}y.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' \f'):"
 if [ "${GPSSE: -4:1}" != "." ]
@@ -73,7 +74,7 @@ then
     GPSSE="${GPSSE%???}.${GPSSE: -3}"
 fi
 # z
-maim -i $(xdotool getactivewindow) -g $gZ ${SCR_IMG}z.png
+maim -i $ACTIVEWINVAR -g $gZ ${SCR_IMG}z.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}z.png
 GPSSE+="$(echo $(tesseract ${SCR_IMG}z.png stdout -l SEfont -c tessedit_char_whitelist=1234567890-.) | tr -d ' \f'):"
 if [ "${GPSSE: -4:1}" != "." ]
@@ -84,10 +85,8 @@ fi
 
 
 # throwing it at all selections to see if it would change the clipboard inside wine/SE
-# it would not
+# it would not - UPDATE filtering out the \f characters resulted in winse clipboard updateing as expected
 # one is likely enough for you so uncomment what you don't need
-# im able to get the past back into the wine/SE clipboard by pasting outside of wine and copying it again
-# there should be a way to force sync the X clipboard to wine but i haven't really looked yet
 echo ${GPSSE} | xclip -i -selection primary
 echo ${GPSSE} | xclip -i -selection secondary
 echo ${GPSSE} | xclip -i -selection clipboard
