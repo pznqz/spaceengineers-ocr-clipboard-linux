@@ -39,7 +39,7 @@ You need (links lead to installation instructions)
   1. Follow the instructions to set the gNAME, gX, gY, gZ and SCR_IMG variables.
   2. Test run the script with your hotkey while the SE gps menu is active and a gps is selected.
   3. Check the images in example_pre_processed_images directory and compare your tempClip images with the examples.
-  4. Adjust gNAME, gX, gY and gZ if you need to and repeat ii,iii and iv till satisfied.
+  4. Adjust gX, gY and gZ if you need to and repeat ii,iii and iv till satisfied.
   5. Un-comment the three `mogrify` commands on line 62, line 74 and line 82.
   6. Attempt to copy and paste a gps using your hotkey. If it works you are done.
   7. Should you notice it making mistakes (missing or mistaken characters), follow the advice in the scripts comments starting at line 37 to fine tune mogrify's adjustments to the image. Repeat this till you reduce or remove missing or mistaken characters to your satisfaction.
