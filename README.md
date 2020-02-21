@@ -14,7 +14,7 @@ There are 2 scripts:
 
 ## Known/expected problems
 * Very small characters not being detected or being mistaken for each other, like . and , or ' and ` (this is not an issue with gps x, y or z coordinates though)
-* The font was very much a first pass and I didn't expect such good results, (beginners luck?). I, bearing that in mind, while making the font I grew a tad impatient and seeing as I was at the time focusing on gps. I decided to skip fine tuning brackets, assuming I would return to fine tuning the font later. Namely []{}(). Because they were characters that required the most tweaking and I wanted to get to testing/training tesseract. So because of this brackets may be prone to being mistaken for each other or even other characters, like [] being seen as 0. This will not be good for copying prog block code so I will likely reproduce the font and thus the trained data at some point when working on txtselSEclip.sh.
+* The font was very much a first pass and I didn't expect such good results, (beginners luck?). I, bearing that in mind, while making the font grew a tad impatient and seeing as I was at the time focusing on gps. I decided to skip fine tuning brackets, assuming I would return to fine tuning the font later. Namely []{}(). Because they were characters that required the most tweaking and I wanted to get to testing/training tesseract. So because of this brackets may be prone to being mistaken for each other or even other characters, like [] being seen as 0. This will not be good for copying prog block code so I will likely reproduce the font and thus the trained data at some point when working on txtselSEclip.sh.
 * I and ! love being mistaken for each other.
 * ^ is a problem.
 
