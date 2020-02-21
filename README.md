@@ -37,12 +37,12 @@ You need (links lead to installation instructions)
 * Bind it to a hotkey like super+c, different DEs have different tools for this, web search for "[your DE here ie Gnome/Mate] bind script to hotkey", or use sxhkd/xbindkeys.
 * Open gpsSEclip.sh in a text editor and 
   1. Follow the instructions to set the gNAME, gX, gY, gZ and SCR_IMG variables.
-  * Test run the script with your hotkey while the SE gps menu is active and a gps is selected.
-  * Check the images in example_pre_processed_images directory and compare your tempClip images with the examples.
-  * Adjust gNAME, gX, gY and gZ if you need to and repeat 2,3 and 4 till satisfied.
-  * Un-comment the three `mogrify` commands on line 62, line 74 and line 82.
-  * Attempt to copy and paste a gps using your hotkey. If it works you are done.
-  * Should you notice it making mistakes (missing or mistaken characters), follow the advice in the scripts comments starting at line 37 to fine tune mogrify's adjustments to the image. Repeat this till you reduce or remove missing or mistaken characters to your satisfaction.
+  2. Test run the script with your hotkey while the SE gps menu is active and a gps is selected.
+  3. Check the images in example_pre_processed_images directory and compare your tempClip images with the examples.
+  4. Adjust gNAME, gX, gY and gZ if you need to and repeat ii,iii and iv till satisfied.
+  5. Un-comment the three `mogrify` commands on line 62, line 74 and line 82.
+  6. Attempt to copy and paste a gps using your hotkey. If it works you are done.
+  7. Should you notice it making mistakes (missing or mistaken characters), follow the advice in the scripts comments starting at line 37 to fine tune mogrify's adjustments to the image. Repeat this till you reduce or remove missing or mistaken characters to your satisfaction.
 * Some advice. When adjusting mogrify to get better accuracy, if there are just a few characters in the name field failing to be detected correctly but the x y and z fields are persistently correct. It may be beset to settle with what you have, because lets be honest the coordinates are much more important than a few hold out characters in the name. Though I would like to hear about those characters and your resolution / gNAME/X/Y/Z variable values.
 * @ me (@Dig#3443) in keens linux discord channel if you need help
 
