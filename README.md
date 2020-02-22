@@ -47,6 +47,8 @@ You need (links lead to installation instructions)
 * @ me (@Dig#3443) in keens linux discord channel if you need help
 
 **TODO** put all instructions here and make them easier to follow
+**TODO** cant tweak mogrify for them but I could make presets triggered by args to make it simpler to do
+**TODO** auto generate the gNAME/X/Y/Z vars
 
 ### txtselSEclip.sh
 * **TODO**
