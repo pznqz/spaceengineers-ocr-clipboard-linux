@@ -56,11 +56,10 @@ GPSSE="GPS:"
 # MY settings with the old traineddata were adaptive sharpen of 5% and scale of 150%
 
 ACTIVEWINVAR=$(xdotool getactivewindow)
-TESSWHITELIST="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-@#$~!+=*&%|;><,[](){}\`.\\/_'\" ?"
 # name
 maim -i $ACTIVEWINVAR -g $gNAME $SCR_IMG.png
 #mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% $SCR_IMG.png
-GPSSE+="$(echo $(tesseract $SCR_IMG.png stdout -l SEfont -c tessedit_char_whitelist=$TESSWHITELIST) |sed -e 's/[[:space:]]*$//' ):"
+GPSSE+="$(echo $(tesseract $SCR_IMG.png stdout -l SEfont) |sed -e 's/[[:space:]]*$//' ):"
 # x
 maim -i $ACTIVEWINVAR -g $gX ${SCR_IMG}x.png
 mogrify -modulate 100,0 -normalize -channel RGB -negate -scale 110% ${SCR_IMG}x.png
